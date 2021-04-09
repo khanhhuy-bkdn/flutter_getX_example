@@ -12,7 +12,7 @@ class ProposalResultModel {
   int? recheckQty;
   int? rejectionQty;
   int? approvedQty;
-  List<ProposalModel?>? items;
+  List<ProposalModel>? items;
 
   ProposalResultModel(
       {this.approvedQty,
@@ -34,9 +34,7 @@ ProposalResultModel _$ProposalResultModelFromJson(Map<String, dynamic> json) {
   return ProposalResultModel(
     approvedQty: json['extraData']['approvedQty'] as int,
     items: (json['items'] as List)
-        .map((e) => e == null
-            ? null
-            : ProposalModel.fromJson(e as Map<String, dynamic>))
+        .map((e) => ProposalModel.fromJson(e as Map<String, dynamic>))
         .toList(),
     recheckQty: json['extraData']['recheckQty'] as int,
     rejectionQty: json['extraData']['rejectionQty'] as int,

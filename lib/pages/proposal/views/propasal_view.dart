@@ -20,7 +20,6 @@ import 'package:get/get.dart';
 import '../../../utils/date_time_extension.dart';
 
 class ProposalView extends StatefulWidget {
-  static final String routerName = '/proposal';
   @override
   _ProposalViewState createState() => _ProposalViewState();
 }
@@ -119,9 +118,10 @@ class _ProposalViewState extends State<ProposalView>
 
   Widget headerWidget(BuildContext context) {
     return Container(
-      color: defaultBgColor,
       width: MediaQuery.of(context).size.width,
-      height: 90,
+      decoration: BoxDecoration(
+        color: defaultBgColor,
+      ),
       child: Column(
         children: <Widget>[
           Row(
@@ -153,18 +153,23 @@ class _ProposalViewState extends State<ProposalView>
               )
             ],
           ),
-          Container(
-            margin: EdgeInsets.only(bottom: 16),
-            child: GetBuilder<FilterProposalController>(
-                init: _filterProposalController,
-                builder: (item) {
-                  return Text(
-                    '${item.filterProposalResult?.fromDate?.formatDateDefault() ?? ''} - ${item.filterProposalResult?.toDate?.formatDateDefault() ?? ''}',
-                    textAlign: TextAlign.center,
-                    style: CustomTheme.subTitle2(context)
-                        .apply(color: Colors.white),
-                  );
-                }),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 24),
+                child: GetBuilder<FilterProposalController>(
+                    init: _filterProposalController,
+                    builder: (item) {
+                      return Text(
+                        '${item.filterProposalResult?.fromDate?.formatDateDefault() ?? ''} - ${item.filterProposalResult?.toDate?.formatDateDefault() ?? ''}',
+                        textAlign: TextAlign.center,
+                        style: CustomTheme.subTitle2(context)
+                            .apply(color: Colors.white),
+                      );
+                    }),
+              ),
+            ],
           )
         ],
       ),
@@ -175,7 +180,7 @@ class _ProposalViewState extends State<ProposalView>
     return Container(
         color: HexColor('#f1f7fa'),
         child: Container(
-          margin: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 5),
+          margin: EdgeInsets.only(top: 22, left: 10, right: 10, bottom: 5),
           child: RefreshIndicator(
             onRefresh: _pullRefresh,
             child: GetBuilder<FilterProposalController>(

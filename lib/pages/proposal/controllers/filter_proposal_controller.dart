@@ -8,7 +8,7 @@ class FilterProposalController extends GetxController {
   FilterProposalController({required this.proposalRepository});
   final IProposalRepository proposalRepository;
 
-  List<ProposalModel?>? listResult = [];
+  List<ProposalModel>? listResult = [];
   FilterProposalModel? filterProposalResult;
   ProposalResultModel? proposalResult;
   bool isLoading = true;
@@ -35,7 +35,7 @@ class FilterProposalController extends GetxController {
         if (filterProposal.page > 0) {
           listResult?.addAll(proposalResult!.items!);
         } else {
-          listResult = proposalResult!.items;
+          listResult = proposalResult!.items ?? [];
         }
         canLoadMore =
             proposalResult!.pageIndex! < proposalResult!.totalPages! &&
